@@ -76,7 +76,9 @@ class Temp(object):
                     row, col = self.grid.get_grid_dims(pos)
                     # print(row, col, sep='\t')
 
-                    if self.grid.is_valid_pos
+                    if self.grid.is_valid_pos(row, col):
+                        pass
+
 
                 if pressed[2]:
                     pos = pygame.mouse.get_pos()
