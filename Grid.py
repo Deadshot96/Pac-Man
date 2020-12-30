@@ -38,7 +38,9 @@ class Grid(object):
 
             for row, col in wall:
                 if self.is_valid_pos(row, col):
-                    self.grid[row][col].make_wall()
+                    spot = self.grid[row][col]
+                    spot.make_wall()
+                    self.wall.append(spot)
 
     def draw_lines(self, win: pygame.Surface) -> None:
         for x in range(GRID_OFFSET, GRID_OFFSET + GRID_COLS * GRID_SIZE + 5, GRID_SIZE):
@@ -67,10 +69,8 @@ class Grid(object):
         return row, col
 
     def draw_wall(self, win: pygame.Surface) -> None:
-        for row in self.grid:
-            for spot in row:
-                if spot.is_wall():
-                    spot.draw(win)
+        for spot in self.wall:
+            spot.draw(win)
 
     def draw_path(self, win: pygame.Surface) -> None:
         for row in self.grid:
