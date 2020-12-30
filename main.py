@@ -10,6 +10,7 @@ import settings
 from color import BLACK
 from Grid import Grid
 from Dot import Dot
+
 class Game(object):
 
     asset_dir = os.path.join(os.getcwd(), 'assets')
