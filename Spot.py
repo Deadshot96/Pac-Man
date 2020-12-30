@@ -59,6 +59,9 @@ class Spot:
     def close(self):
         self.isClosed = True
 
+    def open(self):
+        self.isClosed = False
+
     def make_blinky(self):
         self.isItem = True
         self.color = pygame.color.THECOLORS['red2']
@@ -84,4 +87,4 @@ class Spot:
 
     def update_neighbors(self):
         pass
-    
+
