@@ -54,8 +54,8 @@ class Grid(object):
 
     def get_grid_dims(self, pos: Tuple) -> Tuple:
         x, y = pos
-        row = (x - GRID_OFFSET) // GRID_SIZE
-        col = (y - GRID_OFFSET) // GRID_SIZE
+        row = (y - GRID_OFFSET) // GRID_SIZE
+        col = (x - GRID_OFFSET) // GRID_SIZE
 
         return row, col
 
