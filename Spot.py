@@ -1,10 +1,11 @@
 from color import *
 import pygame
+from settings import GRID_SIZE, GRID_OFFSET
 
 class Spot:
 
-    SIZE = 20
-    OFFSET = 50
+    SIZE = GRID_SIZE
+    OFFSET = GRID_OFFSET
 
     def __init__(self, row: int, col: int):
         self.row = row
