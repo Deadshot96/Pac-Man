@@ -72,11 +72,20 @@ class Grid(object):
         for spot in self.wall:
             spot.draw(win)
 
+    def make_dot(self, row: int, col: int) -> None:
+        spot = self.grid[row][col]
+        spot.make_dot()
+        self.dots.append(spot)
+
     def draw_path(self, win: pygame.Surface) -> None:
         for row in self.grid:
             for spot in row:
                 if not spot.is_wall():
                     spot.draw(win)
+
+    def draw_dots(self, win: pygame.Surface) -> None:
+        for dot in self.dots:
+            dot.draw(win)
 
 
     def is_valid_pos(self, row: int, col: int) -> bool:
