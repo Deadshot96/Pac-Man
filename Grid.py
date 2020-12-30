@@ -59,6 +59,12 @@ class Grid(object):
 
         return row, col
 
+    def draw_wall(self, win: pygame.Surface) -> None:
+        for row in self.grid:
+            for spot in row:
+                if spot.is_wall():
+                    spot.draw(win)
+
 
     def is_valid_pos(self, row: int, col: int) -> bool:
         return row in range(GRID_ROWS) and col in range(GRID_COLS)
