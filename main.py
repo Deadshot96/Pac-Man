@@ -9,6 +9,7 @@ from queue import PriorityQueue
 import settings
 from color import BLACK
 from Grid import Grid
+from Dot import Dot
 class Game(object):
 
     asset_dir = os.path.join(os.getcwd(), 'assets')
@@ -27,6 +28,7 @@ class Game(object):
         self.offset = settings.GRID_OFFSET
         self.fps = settings.FPS
         self.grid = None
+        self.dots = None
         self.player = None
         self.clock = None
         self.win = None
@@ -41,20 +43,48 @@ class Game(object):
         pygame.display.set_caption("Pac-Man Developer")
 
         self.grid = Grid()
-
+        self.dot_init()
         self.clock = pygame.time.Clock()
         
         self.win.fill(BLACK)
         pygame.display.update()
+
+    def dot_init(self) -> None:
+        self.dots = list()
+        dot_len = settings.DOT_LEN
+        size = settings.DOT_SIZE
+        offset = settings.DOT_OFFSET
+
+        for row in range(dot_len):
+            self.dots.append(list())
+            for col in range(dot_len):
+                x = col * size + offset - self.offset
+                y = row * size + offset - self.offset
+
+                if self.is_valid_dot_pos(x, y):
+                    dot = Dot(row, col, self.DOT)
+                    self.dots[row].append(dot)
+                    self.grid.make_dot(row + 1, col + 1)
+
+
+    def is_valid_dot_pos(self, x: int, y: int) -> bool:
+        return self.DOTMAP.get_at((x, y)) == (0, 0, 0)
 
 
     def draw(self, win: pygame.Surface) -> None:
         win.blit(self.BG, (self.offset, self.offset))
 
         if self.showWall:
-            self.grid.draw_path(self.win)
-
+            self.grid.draw_dots(self.win)
+        self.draw_dots(win)
         pygame.display.update()
+
+
+    def draw_dots(self, win: pygame.Surface) -> None:
+        for row in self.dots:
+            for dot in row:
+                if not dot.is_eaten():
+                    dot.draw(win)
 
     def run(self) -> None:
 
