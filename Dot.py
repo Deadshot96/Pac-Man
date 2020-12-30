@@ -1,8 +1,8 @@
 from settings import DOT_SIZE, DOT_OFFSET, DOT_LEN
-
+from pygame import Surface
 class Dot(object):
 
-    def __init__(self, row: int, col: int, img: pygame.Surface):
+    def __init__(self, row: int, col: int, img: Surface):
         self.row = row
         self.col = col
         self.dot = img
@@ -10,7 +10,7 @@ class Dot(object):
         self.y = self.row * DOT_SIZE + DOT_OFFSET
         self.isEaten = False
 
-    def draw(self, win: pygame.Surface) -> None:
+    def draw(self, win: Surface) -> None:
         win.blit(self.dot, (self.x, self.y))
 
     def eat(self) -> None:
