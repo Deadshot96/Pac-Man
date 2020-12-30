@@ -9,7 +9,7 @@ from settings import GRID_COLS, GRID_ROWS, GRID_SIZE, GRID_OFFSET
 
 class Grid(object):
 
-    asset_dir = os.path.join(os.getcwd(), 'assets_pac_man')
+    asset_dir = os.path.join(os.getcwd(), 'assets')
 
     def __init__(self):
         super().__init__()
@@ -32,6 +32,13 @@ class Grid(object):
             for col in range(GRID_COLS):
                 spot = Spot(row, col)
                 self.grid[row].append(spot)
+
+        with shelve.open(os.path.join(self.asset_dir, 'grid_wall')) as file:
+            wall = file['wall']
+
+            for row, col in wall:
+                if self.is_valid_pos(row, col):
+                    self.grid[row][col].make_wall()
 
     def draw_lines(self, win: pygame.Surface) -> None:
         for x in range(GRID_OFFSET, GRID_OFFSET + GRID_COLS * GRID_SIZE + 5, GRID_SIZE):
@@ -63,6 +70,12 @@ class Grid(object):
         for row in self.grid:
             for spot in row:
                 if spot.is_wall():
+                    spot.draw(win)
+
+    def draw_path(self, win: pygame.Surface) -> None:
+        for row in self.grid:
+            for spot in row:
+                if not spot.is_wall():
                     spot.draw(win)
 
 
