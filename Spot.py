@@ -41,7 +41,7 @@ class Spot:
 
     def make_wall(self) -> None:
         self.isWall = True
-        self.color = BLACK
+        self.color = CORAL
 
     def is_wall(self) -> None:
         return self.isWall
