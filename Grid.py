@@ -25,10 +25,10 @@ class Grid(object):
     def grid_init(self) -> None:
         self.grid = list()
 
-        for row in self.range(GRID_ROWS):
+        for row in range(GRID_ROWS):
             self.grid.append(list())
 
-            for col in self.range(GRID_COLS):
+            for col in range(GRID_COLS):
                 spot = Spot(row, col)
                 self.grid[row].append(spot)
 
