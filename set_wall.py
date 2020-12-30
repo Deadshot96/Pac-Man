@@ -17,7 +17,7 @@ class Temp(object):
         self.clock = None
         self.grid = None
 
-    def grid_init(self):
+    def grid_init(self) -> None:
 
         pygame.init()
         pygame.font.init()
@@ -31,3 +31,30 @@ class Temp(object):
         self.win.fill(BLACK)
         pygame.display.update()
 
+
+    def draw(self, win: pygame.Surface) -> None:
+
+        pygame.display.update()
+
+    def run(self) -> None:
+        
+        self.grid_init()
+
+        run = True
+        while run:
+            self.clock.tick(FPS)
+
+            for event in pygame.event.get():
+
+                if event.type == pygame.QUIT:
+                    run = False
+
+            self.draw(self.win)
+
+        pygame.font.quit()
+        pygame.quit()
+
+
+if __name__ == '__main__':
+    X = Temp()
+    X.run()

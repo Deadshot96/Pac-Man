@@ -32,7 +32,7 @@ class Grid(object):
                 spot = Spot(row, col)
                 self.grid[row].append(spot)
 
-    def draw_lines(self, win: pygame.surface) -> None:
+    def draw_lines(self, win: pygame.Surface) -> None:
         for x in range(GRID_OFFSET, GRID_OFFSET + GRID_COLS * GRID_SIZE + 5, GRID_SIZE):
             pygame.draw.line(win, YELLOW, (x, GRID_OFFSET), (x, 630), 1)
 
@@ -40,7 +40,7 @@ class Grid(object):
             pygame.draw.line(win, YELLOW, (GRID_OFFSET, y), (650, y), 1)
 
 
-    def draw_grid(self, win: pygame.surface) -> None:
+    def draw_grid(self, win: pygame.Surface) -> None:
         for row in self.grid:
             for spot in row:
                 spot.draw(win)

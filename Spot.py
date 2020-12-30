@@ -18,7 +18,7 @@ class Spot:
         self.neighbours = list()
         self.isClosed = False
 
-    def draw(self, win: pygame.surface):
+    def draw(self, win: pygame.Surface):
         pygame.draw.rect(win, self.color, (self.x, self.y, self.SIZE, self.SIZE), 0)
     
     def get_pos(self) -> None:
