@@ -4,6 +4,7 @@ import settings
 import shelve
 from Spot import Spot
 from color import YELLOW
+from typing import Tuple
 from settings import GRID_COLS, GRID_ROWS, GRID_SIZE, GRID_OFFSET
 
 class Grid(object):
@@ -47,3 +48,17 @@ class Grid(object):
 
     def get_spot(self, row: int, col: int) -> Spot:
         return self.grid[row][col]
+
+    def get_dims(self) -> Tuple:
+        return GRID_ROWS, GRID_COLS
+
+    def get_grid_dims(self, pos: Tuple) -> Tuple:
+        x, y = pos
+        row = (x - GRID_OFFSET) // GRID_SIZE
+        col = (x - GRID_OFFSET) // GRID_SIZE
+
+        return row, col
+
+
+    def is_valid_pos(self, row: int, col: int) -> bool:
+        return row in range(GRID_ROWS) and col in range(GRID_COLS)
