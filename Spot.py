@@ -6,7 +6,7 @@ class Spot:
     SIZE = 20
     OFFSET = 50
 
-    def __init__(self, row, col):
+    def __init__(self, row: int, col: int):
         self.row = row
         self.col = col
         self.x = self.col * self.SIZE + self.OFFSET
@@ -18,73 +18,73 @@ class Spot:
         self.neighbours = list()
         self.isClosed = False
 
-    def draw(self, win):
+    def draw(self, win: pygame.surface):
         pygame.draw.rect(win, self.color, (self.x, self.y, self.SIZE, self.SIZE), 0)
     
-    def get_pos(self):
+    def get_pos(self) -> None:
         return self.x, self.y
 
-    def get_dims(self):
+    def get_dims(self) -> None:
         return self.row, self.col
 
-    def make_dot(self):
+    def make_dot(self) -> None:
         self.isDot = True
         self.color = SKIN
 
-    def eat_dot(self):
+    def eat_dot(self) -> None:
         self.isDot = False
         self.color = WHITE
 
-    def is_dot(self):
+    def is_dot(self) -> None:
         return self.isDot
 
-    def make_wall(self):
+    def make_wall(self) -> None:
         self.isWall = True
         self.color = BLACK
 
-    def is_wall(self):
+    def is_wall(self) -> None:
         return self.isWall
 
-    def make_path(self):
+    def make_path(self) -> None:
         self.isWall = False
         self.color = WHITE
 
-    def make_player(self):
+    def make_player(self) -> None:
         self.isItem = True
         self.color = YELLOW
 
-    def is_closed(self):
+    def is_closed(self) -> None:
         return self.isClosed
 
-    def close(self):
+    def close(self) -> None:
         self.isClosed = True
 
-    def open(self):
+    def open(self) -> None:
         self.isClosed = False
 
-    def make_blinky(self):
+    def make_blinky(self) -> None:
         self.isItem = True
         self.color = pygame.color.THECOLORS['red2']
 
-    def make_pinky(self):
+    def make_pinky(self) -> None:
         self.isItem = True
         self.color = pygame.color.THECOLORS['pink2']
 
-    def make_inky(self):
+    def make_inky(self) -> None:
         self.isItem = True
         self.color = pygame.color.THECOLORS['cyan2']
 
-    def make_clyde(self):
+    def make_clyde(self) -> None:
         self.isItem = True
         self.color = pygame.color.THECOLORS['yellow2']
 
-    def remove_item(self):
+    def remove_item(self) -> None:
         self.isItem = False
         self.color = WHITE
 
-    def is_empty(self):
+    def is_empty(self) -> None:
         return not (self.isItem or self.isWall)
 
-    def update_neighbors(self):
+    def update_neighbors(self) -> None:
         pass
 

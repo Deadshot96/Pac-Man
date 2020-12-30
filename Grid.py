@@ -22,7 +22,7 @@ class Grid(object):
         self.grid_init()
 
 
-    def grid_init(self):
+    def grid_init(self) -> None:
         self.grid = list()
 
         for row in self.range(GRID_ROWS):
