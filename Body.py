@@ -87,15 +87,4 @@ class Body(object):
     def is_cool(self) -> bool:
         return self.cooldown_count == 0
 
-    def get_next_pos(self) -> Tuple:    
-        row = self.row + self.moveRow
-        col = self.col + self.moveCol
-
-        return row, col
-
-    def change_pos(self, row: int, col: int):
-        self.row = row
-        self.col = col
-
-        self.set_x_and_y()
         
