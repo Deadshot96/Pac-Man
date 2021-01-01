@@ -38,3 +38,15 @@ class Player(Body):
         self.moveRow = 0
         self.moveCol = -1
         self.angle = 180
+
+    def get_next_pos(self) -> Tuple:    
+        row = self.row + self.moveRow
+        col = self.col + self.moveCol
+
+        return row, col
+
+    def change_pos(self, row: int, col: int):
+        self.row = row
+        self.col = col
+
+        self.set_x_and_y()
