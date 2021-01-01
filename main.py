@@ -10,6 +10,7 @@ import settings
 from color import BLACK
 from Grid import Grid
 from Dot import Dot
+from Player import Player
 
 class Game(object):
 
@@ -45,6 +46,7 @@ class Game(object):
 
         self.grid = Grid()
         self.dot_init()
+        self.player_init()
         self.clock = pygame.time.Clock()
         
         self.win.fill(BLACK)
@@ -67,6 +69,11 @@ class Game(object):
                     self.dots[row].append(dot)
                     self.grid.make_dot(row + 1, col + 1)
 
+    def player_init(self) -> None:
+        self.player = Player()
+        row, col = self.player.get_pos()
+        self.grid.make_player(row, col)
+        
 
     def is_valid_dot_pos(self, x: int, y: int) -> bool:
         return self.DOTMAP.get_at((x, y)) == (0, 0, 0)
@@ -76,8 +83,9 @@ class Game(object):
         win.blit(self.BG, (self.offset, self.offset))
 
         if self.showWall:
-            self.grid.draw_dots(self.win)
+            self.grid.draw_lines(self.win)
         self.draw_dots(win)
+        self.grid.draw_player(win)
         pygame.display.update()
 
 
