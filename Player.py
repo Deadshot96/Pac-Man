@@ -9,7 +9,7 @@ class Player(Body):
         super().__init__('player')
 
         self.IMAGECOUNT = 3
-        self.COOLDOWN = 10
+        self.COOLDOWN = 8
         self.row = 17
         self.col = 14
 
@@ -19,3 +19,22 @@ class Player(Body):
         # Loads all the images
         self.load_images()
     
+    def turn_up(self) -> None:
+        self.moveRow = -1
+        self.moveCol = 0
+        self.angle = 90
+
+    def turn_down(self) -> None:
+        self.moveRow = 1
+        self.moveCol = 0
+        self.angle = 270
+
+    def turn_right(self) -> None:
+        self.moveRow = 0
+        self.moveCol = 1
+        self.angle = 0
+
+    def turn_left(self) -> None:
+        self.moveRow = 0
+        self.moveCol = -1
+        self.angle = 180
