@@ -9,7 +9,7 @@ class Player(Body):
         super().__init__('player')
 
         self.IMAGECOUNT = 3
-        self.COOLDOWN = 8
+        self.COOLDOWN = 7
         self.row = 17
         self.col = 14
 
