@@ -85,7 +85,8 @@ class Game(object):
         if self.showWall:
             self.grid.draw_lines(self.win)
         self.draw_dots(win)
-        self.grid.draw_player(win)
+        self.player.draw(win)
+        # self.grid.draw_player(win)
         pygame.display.update()
 
     def move_player(self) -> None:
@@ -95,7 +96,7 @@ class Game(object):
             row, col = self.player.get_next_pos()
 
             if self.grid.is_valid_player_move(row, col):
-                pass
+                self.player.change_pos(row, col)
             
         self.player.cooldown()
 
@@ -106,11 +107,15 @@ class Game(object):
                 if not dot.is_eaten():
                     dot.draw(win)
 
+    def move(self) -> None:
+        self.move_player()
+
     def run(self) -> None:
 
         self.game_init()
         
         run = True
+        self.player.turn_right()
         while run:
             self.clock.tick(self.fps)
 
@@ -129,7 +134,21 @@ class Game(object):
                     if keys[pygame.K_SPACE]:
                         self.showWall = not self.showWall
 
+                    if keys[pygame.K_UP]:
+                        self.player.turn_up()
+
+                    if keys[pygame.K_DOWN]:
+                        self.player.turn_down()
+
+                    if keys[pygame.K_LEFT]:
+                        self.player.turn_left()
+
+                    if keys[pygame.K_RIGHT]:
+                        self.player.turn_right()
+
+            self.move()
             self.draw(self.win)
+
 
         pygame.font.quit()
         pygame.quit()
