@@ -35,12 +35,13 @@ class Grid(object):
 
         with shelve.open(os.path.join(self.asset_dir, 'grid_wall')) as file:
             wall = file['wall']
-
+            wall.extend([(12, 14), (12, 15)])
             for row, col in wall:
                 if self.is_valid_pos(row, col):
                     spot = self.grid[row][col]
                     spot.make_wall()
                     self.wall.append(spot)
+            
 
     def draw_lines(self, win: pygame.Surface) -> None:
         for x in range(GRID_OFFSET, GRID_OFFSET + GRID_COLS * GRID_SIZE + 5, GRID_SIZE):
@@ -95,6 +96,11 @@ class Grid(object):
     def draw_dots(self, win: pygame.Surface) -> None:
         for dot in self.dots:
             dot.draw(win)
+
+    def remove_dot(self, row: int, col: int) -> None:
+        spot = self.grid.get_spot(row, col)
+        self.dots.remove(spot)
+        spot.remove_dot()
 
 
     def is_valid_pos(self, row: int, col: int) -> bool:
