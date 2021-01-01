@@ -47,7 +47,7 @@ class Spot:
         return self.isWall
 
     def is_path(self) -> bool:
-        return not self.isWall()
+        return not self.isWall
 
     def make_path(self) -> None:
         self.isWall = False
