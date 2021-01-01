@@ -32,7 +32,7 @@ class Spot:
         self.isDot = True
         self.color = SKIN
 
-    def eat_dot(self) -> None:
+    def remove_dot(self) -> None:
         self.isDot = False
         self.color = WHITE
 
