@@ -36,15 +36,18 @@ class Spot:
         self.isDot = False
         self.color = WHITE
 
-    def is_dot(self) -> None:
+    def is_dot(self) -> bool:
         return self.isDot
 
     def make_wall(self) -> None:
         self.isWall = True
         self.color = CORAL
 
-    def is_wall(self) -> None:
+    def is_wall(self) -> bool:
         return self.isWall
+
+    def is_path(self) -> bool:
+        return not self.isWall()
 
     def make_path(self) -> None:
         self.isWall = False
@@ -54,10 +57,10 @@ class Spot:
         self.isItem = True
         self.color = YELLOW
 
-    def is_closed(self) -> None:
+    def is_closed(self) -> bool:
         return self.isClosed
 
-    def close(self) -> None:
+    def close(self) -> bool:
         self.isClosed = True
 
     def open(self) -> None:
@@ -83,7 +86,7 @@ class Spot:
         self.isItem = False
         self.color = WHITE
 
-    def is_empty(self) -> None:
+    def is_empty(self) -> bool:
         return not (self.isItem or self.isWall)
 
     def update_neighbors(self) -> None:
