@@ -53,20 +53,19 @@ class Game(object):
         pygame.display.update()
 
     def dot_init(self) -> None:
-        self.dots = list()
+        self.dots = dict()
         dot_len = settings.DOT_LEN
         size = settings.DOT_SIZE
         offset = settings.DOT_OFFSET
 
         for row in range(dot_len):
-            self.dots.append(list())
             for col in range(dot_len):
                 x = col * size + offset - self.offset
                 y = row * size + offset - self.offset
 
                 if self.is_valid_dot_pos(x, y):
                     dot = Dot(row, col, self.DOT)
-                    self.dots[row].append(dot)
+                    self.dots[(row, col)] = dot
                     self.grid.make_dot(row + 1, col + 1)
 
     def player_init(self) -> None:
@@ -97,15 +96,18 @@ class Game(object):
 
             if self.grid.is_valid_player_move(row, col):
                 self.player.change_pos(row, col)
+
+            if self.grid.is_valid_pos(row, col) and self.dots.get((row - 1, col - 1)):
+                self.dots[(row - 1, col - 1)].eat()
+            
             
         self.player.cooldown()
 
 
     def draw_dots(self, win: pygame.Surface) -> None:
-        for row in self.dots:
-            for dot in row:
-                if not dot.is_eaten():
-                    dot.draw(win)
+        for dims, dot in self.dots.items():
+            if not dot.is_eaten():
+                dot.draw(win)
 
     def move(self) -> None:
         self.move_player()
