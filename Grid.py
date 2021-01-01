@@ -99,3 +99,9 @@ class Grid(object):
 
     def is_valid_pos(self, row: int, col: int) -> bool:
         return row in range(GRID_ROWS) and col in range(GRID_COLS)
+
+    def is_valid_player_move(self, row: int, col: int) -> bool:
+        if self.is_valid_pos(row, col) and self.grid[row][col].is_path():
+            return True
+
+        return False
