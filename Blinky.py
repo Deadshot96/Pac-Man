@@ -13,3 +13,5 @@ class Blinky(Body):
 
         self.set_x_and_y()
         self.load_images()
+
+        self.mode = ['scatter', 'fright', 'courage', 'dead']
