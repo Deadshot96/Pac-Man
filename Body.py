@@ -17,8 +17,8 @@ class Body(object):
         self.col = 0
         self.x = 0
         self.y = 0
-        self.moveX = 0
-        self.moveY = 0
+        self.moveRow = 0
+        self.moveCol = 0
         self.angle = 0
         self.vel = 0
 
@@ -79,3 +79,12 @@ class Body(object):
                 self.right.append(pic)
             elif filename.startswith('left'):
                 self.left.append(pic)
+
+    def is_cool(self) -> bool:
+        return self.cooldown_count == 0
+
+    def get_next_pos(self) -> Tuple:    
+        row = self.row + self.moveRow
+        col = self.col + self.moveCol
+
+        return row, col
