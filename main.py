@@ -88,6 +88,17 @@ class Game(object):
         self.grid.draw_player(win)
         pygame.display.update()
 
+    def move_player(self) -> None:
+        if self.player.is_cool():
+            self.player.cooldown_count += 1
+
+            row, col = self.player.get_next_pos()
+
+            if self.grid.is_valid_player_move(row, col):
+                pass
+            
+        self.player.cooldown()
+
 
     def draw_dots(self, win: pygame.Surface) -> None:
         for row in self.dots:
