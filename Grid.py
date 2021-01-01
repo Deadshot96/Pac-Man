@@ -77,6 +77,15 @@ class Grid(object):
         spot.make_dot()
         self.dots.append(spot)
 
+    def make_player(self, row: int, col: int) -> None:
+        if self.is_valid_pos(row, col) and self.player is None:
+            self.player = self.get_spot(row, col)
+            self.player.make_player()
+        
+    def draw_player(self, win: pygame.Surface) -> None:
+        if self.player:
+            self.player.draw(win)
+
     def draw_path(self, win: pygame.Surface) -> None:
         for row in self.grid:
             for spot in row:
