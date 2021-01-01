@@ -3,6 +3,7 @@ from pygame import Surface
 from settings import GRID_SIZE, GRID_OFFSET
 import pygame
 import os
+from color import YELLOW
 
 class Body(object):
 
@@ -24,7 +25,7 @@ class Body(object):
 
         self.animation_count = 0
         self.cooldown_count = 0
-        self.imgDims = (32, 32)
+        self.imgDims = (28, 28)
         self.image = None
 
         self.up = []
@@ -49,8 +50,8 @@ class Body(object):
         return self.x + offset, self.y + offset
 
     def set_x_and_y(self) -> None:
-        self.x = self.row * GRID_SIZE + GRID_OFFSET
-        self.y = self.col * GRID_SIZE + GRID_OFFSET
+        self.x = self.col * GRID_SIZE + GRID_OFFSET + GRID_SIZE // 2
+        self.y = self.row * GRID_SIZE + GRID_OFFSET + GRID_SIZE // 2
 
 
     def draw(self, win: Surface) -> None:
@@ -62,7 +63,10 @@ class Body(object):
                 self.animation_count = 0
 
         self.image = self.angleDict[self.angle][self.animation_count]
-        win.blit(self.image, (self.x, self.y))
+        # pygame.draw.circle(win, YELLOW, (self.x, self.y), 5)
+        rect = self.image.get_rect()
+        rect.center = (self.x, self.y)
+        win.blit(self.image, rect)
         self.cooldown()
 
     def load_images(self) -> None:
@@ -88,3 +92,10 @@ class Body(object):
         col = self.col + self.moveCol
 
         return row, col
+
+    def change_pos(self, row: int, col: int):
+        self.row = row
+        self.col = col
+
+        self.set_x_and_y()
+        
