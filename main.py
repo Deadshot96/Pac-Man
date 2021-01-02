@@ -7,10 +7,14 @@ import math
 import copy
 from queue import PriorityQueue
 import settings
-from color import BLACK
+from color import BLACK, MID_BLACK
 from Grid import Grid
 from Dot import Dot
 from Player import Player
+from Blinky import Blinky
+from Pinky import Pinky
+from Inky import Inky
+from Clyde import Clyde
 
 class Game(object):
 
@@ -32,6 +36,7 @@ class Game(object):
         self.grid = None
         self.dots = None
         self.player = None
+        self.ghosts = None
         self.clock = None
         self.win = None
         self.showWall = False
@@ -47,6 +52,7 @@ class Game(object):
         self.grid = Grid()
         self.dot_init()
         self.player_init()
+        self.ghosts_init()
         self.clock = pygame.time.Clock()
         
         self.win.fill(BLACK)
@@ -77,14 +83,27 @@ class Game(object):
     def is_valid_dot_pos(self, x: int, y: int) -> bool:
         return self.DOTMAP.get_at((x, y)) == (0, 0, 0)
 
+    def ghosts_init(self) -> None:
+        self.ghosts = list()
+
+        self.ghosts.append(Blinky())
+        self.ghosts.append(Inky())
+        self.ghosts.append(Pinky())
+        self.ghosts.append(Clyde())
+
 
     def draw(self, win: pygame.Surface) -> None:
+        win.fill(MID_BLACK)
         win.blit(self.BG, (self.offset, self.offset))
 
         if self.showWall:
             self.grid.draw_lines(self.win)
         self.draw_dots(win)
         self.player.draw(win)
+        
+        for ghost in self.ghosts:
+            ghost.draw(win)
+
         # self.grid.draw_player(win)
         pygame.display.update()
 
