@@ -9,7 +9,7 @@ class Player(Body):
         super().__init__('player')
 
         self.IMAGECOUNT = 3
-        self.COOLDOWN = 7
+        self.COOLDOWN = 10
         self.row = 17
         self.col = 14
 
@@ -39,7 +39,13 @@ class Player(Body):
         self.moveCol = -1
         self.angle = 180
 
-    def get_next_pos(self) -> Tuple:    
+    def get_next_pos(self) -> Tuple:
+
+        if self.row == 14 and self.col == 0 and self.angle == 180:
+            return 14, 29
+        elif self.row == 14 and self.col == 29 and self.angle == 0:
+            return 14, 0
+
         row = self.row + self.moveRow
         col = self.col + self.moveCol
 
