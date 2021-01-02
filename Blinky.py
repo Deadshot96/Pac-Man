@@ -10,6 +10,9 @@ class Blinky(Body):
         self.COOLDOWN = 9
         self.row = 11
         self.col = 14
+        
+        self.imgDims = (26, 26)
+        self.scatter_path = None
 
         self.set_x_and_y()
         self.load_images()
